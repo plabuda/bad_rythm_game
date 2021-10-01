@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <style>
+      .container {
+        display: flex;
+        background-color: #202525;
+        width: 100%;
+        height: 100%;
+        flex-flow: column;
+        align-items: center;
+      }
+
+      .box {
+        margin: 1%;
+        flex-grow: 1;
+        background-color: black;
+        width: 100%;
+      }
+
+      .playerbox {
+        background-color: darkgreen;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-content: center;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="1" class="box"></div>
+      <div id="2" class="box"></div>
+      <div id="3" class="box"></div>
+      <div id="4" class="box"></div>
+      <div id="5" class="box"></div>
+      <div id="player" class="box playerbox">😇</div>
+      <div id="controls" class="box"></div>
+    </div>
+  </body>
+</html>
