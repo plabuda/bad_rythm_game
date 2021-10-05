@@ -40,6 +40,10 @@ $(OUTDIR):
 	mkdir -p $@/$(BIN) $(OUT_DEP_DIRECTORIES)
 
 .PHONY:
+host: $(OUTDIR)/$(BIN)/index.html
+	konsole -e python3 -m http.server --directory $(OUTDIR)/$(BIN) 8000 &
+
+.PHONY:
 clean:
 	rm -rf $(OUT)
 
