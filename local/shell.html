@@ -11,7 +11,7 @@
       }
 
       .box {
-        margin: 1%;
+        margin: 0%;
         flex-grow: 1;
         background-color: black;
         width: 100%;
@@ -25,17 +25,46 @@
         align-content: center;
         text-align: center;
       }
+
+      @keyframes growing {
+        from {
+          flex-grow: 0;
+        }
+        to {
+          flex-grow: 1;
+        }
+      }
+
+      .animated {
+        animation-duration: 1200ms;
+        animation-name: growing;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      .first {
+        animation-direction: normal;
+      }
+
+      .last {
+        animation-direction: reverse;
+      }
     </style>
   </head>
   <body>
     <script src="ui.js"></script>
     <script src="worker.js"></script>
     <div class="container">
-      <div id="1" class="box"></div>
+      <div
+        id="1"
+        class="box animated first"
+        style="background-color: indigo"
+      ></div>
       <div id="2" class="box"></div>
-      <div id="3" class="box"></div>
+      <div id="3" class="box" style="background-color: indigo"></div>
       <div id="4" class="box"></div>
-      <div id="5" class="box"></div>
+      <div id="5" class="box" style="background-color: indigo"></div>
+      <div id="6" class="box animated last"></div>
       <div id="player" class="box playerbox">😇</div>
       <div id="controls" class="box"></div>
     </div>
