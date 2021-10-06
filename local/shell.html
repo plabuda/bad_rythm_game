@@ -32,6 +32,17 @@
         height: calc(100% / 8);
       }
 
+      .controlbox {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        height: calc(100% / 8);
+      }
+
+      .button {
+        height: 100%;
+      }
+
       @keyframes growing {
         from {
           flex-grow: 0;
@@ -143,7 +154,11 @@
   <body>
     <div class="container" id="cont"></div>
     <div id="player" class="playerbox">😇</div>
-    <div id="controls" class="playerbox">👉👈</div>
+    <div id="controls" class="controlbox">
+      <div class="box button" id="red" style="background-color: red"></div>
+      <div class="box button" id="green" style="background-color: green"></div>
+      <div class="box button" id="blue" style="background-color: blue"></div>
+    </div>
     <script src="ui.js"></script>
     <script src="worker.js"></script>
   </body>
