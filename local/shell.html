@@ -16,7 +16,8 @@
         background-color: black;
         width: 100%;
         animation-direction: forward;
-        animation-duration: 250ms;
+        animation-fill-mode: both;
+        animation-duration: 400ms, 200ms;
         animation-timing-function: ease-out;
       }
 
@@ -48,14 +49,34 @@
         }
       }
 
-      .grow-box {
-        animation-name: growing;
-        animation-fill-mode: backwards;
+      @keyframes red-blink {
+        from {
+          background-color: red;
+        }
+        40% {
+          background-color: rgb(185, 185, 185);
+        }
+        50% {
+          background-color: gray;
+        }
+        to {
+          background-color: gray;
+        }
       }
 
-      .shrink-box {
-        animation-name: shrinking;
-        animation-fill-mode: forwards;
+      @keyframes darkred-blink {
+        from {
+          background-color: darkred;
+        }
+        40% {
+          background-color: rgb(185, 185, 185);
+        }
+        50% {
+          background-color: darkgray;
+        }
+        to {
+          background-color: darkgray;
+        }
       }
     </style>
   </head>

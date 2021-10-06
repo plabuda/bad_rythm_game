@@ -1,4 +1,7 @@
-for (let i = 0; i < 7; i++) {
-  add();
+for (let i = 0; i < 4; i++) {
+  add("green");
 }
-setInterval(step, 1000);
+for (let i = 0; i < 3; i++) {
+  add("blue");
+}
+setInterval(step, 600);
