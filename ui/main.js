@@ -1,3 +1,34 @@
+const colors = ["red", "green", "blue"];
+
+const buttons = colors.map((color) => {
+  return document.getElementById(color);
+});
+
+let touch_counts = buttons.map(() => 0);
+
+function add_count(index) {
+  touch_counts[index] += 1;
+  if (touch_counts[index] > 0) {
+    buttons[index].style.backgroundColor = colors[index];
+  }
+}
+
+function sub_count(index) {
+  touch_counts[index] -= 1;
+  if (touch_counts[index] <= 0) {
+    buttons[index].style.backgroundColor = `dark${colors[index]}`;
+  }
+}
+
+for (const [index, button] of buttons.entries()) {
+  button.addEventListener("touchstart", () => {
+    add_count(index);
+  });
+  button.addEventListener("touchend", () => {
+    sub_count(index);
+  });
+}
+
 var dark = false;
 
 function get_div(color) {
