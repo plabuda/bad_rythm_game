@@ -1,7 +1,5 @@
-for (let i = 0; i < 4; i++) {
-  add("green");
+function substep() {
+  postMessage("Message!");
 }
-for (let i = 0; i < 3; i++) {
-  add("blue");
-}
-setInterval(step, 600);
+
+setInterval(substep, 600);

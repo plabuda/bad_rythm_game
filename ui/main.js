@@ -68,7 +68,20 @@ function remove() {
   }
 }
 
+for (let i = 0; i < 4; i++) {
+  add("green");
+}
+for (let i = 0; i < 3; i++) {
+  add("blue");
+}
+
 function step() {
   add("red");
   remove();
 }
+
+const worker = new Worker("worker.js");
+worker.onmessage = (event) => {
+  console.log(event.data);
+  step();
+};
