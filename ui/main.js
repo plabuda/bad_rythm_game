@@ -119,6 +119,11 @@ function step() {
 
 const worker = new Worker("worker.js");
 worker.onmessage = (event) => {
+  const response = {
+    cleared: true,
+    color: event.data,
+    state: 1,
+  };
   console.log(event.data);
-  step();
+  handle_responnse(response);
 };
