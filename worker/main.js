@@ -18,10 +18,28 @@ function* colorgen() {
   }
 }
 
-const iterator = colorgen();
+function* cleargen() {
+  let i = 0;
+  while (i < 20) {
+    yield true;
+    i++;
+  }
+  while (true) {
+    yield false;
+  }
+}
+
+const col_iter = colorgen();
+const clr_iter = cleargen();
 
 function substep() {
-  postMessage(iterator.next().value);
+  const pass = clr_iter.next().value;
+  const response = {
+    cleared: pass,
+    color: col_iter.next().value,
+    state: pass ? 1 : 2,
+  };
+  postMessage(response);
 }
 
 setInterval(substep, 600);

@@ -8,10 +8,26 @@ const buttons = colors.map((color) => {
 
 let touch_counts = buttons.map(() => 0);
 
+const player = document.getElementById("player");
+
+function light_player(index) {
+  if (game_state == 1) {
+    player.style.backgroundColor = colors[index];
+    worker.postMessage(colors[index]);
+  }
+}
+
+function darken_player(index) {
+  if (game_state == 1 && player.style.backgroundColor == colors[index]) {
+    player.style.backgroundColor = `dark${colors[index]}`;
+  }
+}
+
 function add_count(index) {
   touch_counts[index] += 1;
   if (touch_counts[index] > 0) {
     buttons[index].style.backgroundColor = colors[index];
+    light_player(index);
   }
 }
 
@@ -19,6 +35,7 @@ function sub_count(index) {
   touch_counts[index] -= 1;
   if (touch_counts[index] <= 0) {
     buttons[index].style.backgroundColor = `dark${colors[index]}`;
+    darken_player(index);
   }
 }
 
@@ -119,11 +136,6 @@ function step() {
 
 const worker = new Worker("worker.js");
 worker.onmessage = (event) => {
-  const response = {
-    cleared: true,
-    color: event.data,
-    state: 1,
-  };
   console.log(event.data);
-  handle_responnse(response);
+  handle_responnse(event.data);
 };
