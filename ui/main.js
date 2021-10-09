@@ -1,5 +1,7 @@
 const colors = ["red", "green", "blue"];
 
+let game_state = 1; // 0 connected, 1 - playing , 2- game over
+
 const buttons = colors.map((color) => {
   return document.getElementById(color);
 });
@@ -43,6 +45,12 @@ function shrink_div(div) {
   div.style.animationName = "shrinking";
 }
 
+function blink_player() {
+  let player = document.getElementById("player");
+  let color = player.style.backgroundColor;
+  player.style.animationName = `${color}-blink`;
+}
+
 function blink_div(div) {
   let currentAnim = div.style.animationName;
   let color = div.style.backgroundColor;
@@ -63,9 +71,13 @@ function remove() {
   if (len > 1) {
     let shrinking = container.childNodes[1];
     shrink_div(shrinking);
-    blink_div(shrinking);
     container.removeChild(container.childNodes[0]);
+    return shrinking;
   }
+}
+
+function clear_next() {
+  blink_div(remove());
 }
 
 for (let i = 0; i < 4; i++) {
@@ -75,9 +87,34 @@ for (let i = 0; i < 3; i++) {
   add("blue");
 }
 
+function handle_state_switch(state) {
+  game_state = state;
+}
+
+function handle_responnse(response) {
+  if (response.cleared) {
+    clear_next();
+  } else {
+    remove();
+    blink_player();
+  }
+
+  if ("color" in response) {
+    add(response.color);
+  }
+
+  if ("state" in response) {
+    handle_state_switch(response.state);
+  }
+}
+
 function step() {
-  add("red");
-  remove();
+  const response = {
+    cleared: true,
+    color: "red",
+    state: 1,
+  };
+  handle_responnse(response);
 }
 
 const worker = new Worker("worker.js");
