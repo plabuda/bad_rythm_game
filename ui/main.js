@@ -97,11 +97,8 @@ function clear_next() {
   blink_div(remove());
 }
 
-for (let i = 0; i < 4; i++) {
-  add("green");
-}
-for (let i = 0; i < 3; i++) {
-  add("blue");
+for (let i = 0; i < 7; i++) {
+  add("gray");
 }
 
 function handle_state_switch(state) {
