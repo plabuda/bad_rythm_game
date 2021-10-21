@@ -120,6 +120,10 @@ function handle_responnse(response) {
   if ("state" in response) {
     handle_state_switch(response.state);
   }
+
+  if ("score" in response) {
+    player.innerText = `${response.score}`;
+  }
 }
 
 function step() {

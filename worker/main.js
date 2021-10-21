@@ -1,6 +1,7 @@
 let colors = [];
 let player_color = "gray";
 let game_state = 1;
+let score = 0;
 
 function* colorgen() {
   while (true) {
@@ -45,12 +46,19 @@ function step_game() {
   const pass =
     game_state == 1 &&
     (current_color == "gray" || current_color == player_color);
+  if (pass && current_color != "gray") {
+    score += 1;
+  }
   game_state = pass ? 1 : 2;
-  return {
+  let response = {
     cleared: pass,
     color: new_color,
     state: game_state,
   };
+  if (!pass) {
+    response["score"] = score;
+  }
+  return response;
 }
 
 function substep() {
