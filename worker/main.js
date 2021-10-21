@@ -42,7 +42,9 @@ function step_game() {
   console.log("New Color is " + new_color);
   console.log("Current Color is " + current_color);
   console.log("Player Color is " + player_color);
-  const pass = current_color == "gray" || current_color == player_color;
+  const pass =
+    game_state == 1 &&
+    (current_color == "gray" || current_color == player_color);
   game_state = pass ? 1 : 2;
   return {
     cleared: pass,
