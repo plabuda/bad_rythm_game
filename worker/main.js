@@ -4,10 +4,6 @@ let game_state = 1;
 
 function* colorgen() {
   while (true) {
-    yield "gray";
-    yield "gray";
-    yield "gray";
-
     yield "red";
     yield "red";
     yield "gray";
@@ -19,17 +15,6 @@ function* colorgen() {
     yield "green";
     yield "green";
     yield "gray";
-  }
-}
-
-function* cleargen() {
-  let i = 0;
-  while (i < 20) {
-    yield true;
-    i++;
-  }
-  while (true) {
-    yield false;
   }
 }
 
@@ -50,7 +35,6 @@ function color_push(color) {
 }
 
 const col_iter = colorgen();
-const clr_iter = cleargen();
 
 function step_game() {
   const new_color = col_iter.next().value;
@@ -76,4 +60,5 @@ self.onmessage = (e) => {
     player_color = e.data;
   }
 };
+
 setInterval(substep, 600);
