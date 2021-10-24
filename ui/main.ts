@@ -39,13 +39,15 @@ function sub_count(index) {
   }
 }
 
-for (const [index, button] of buttons.entries()) {
+let index = 0;
+for (const button of buttons) {
   button.addEventListener("touchstart", () => {
     add_count(index);
   });
   button.addEventListener("touchend", () => {
     sub_count(index);
   });
+  index++;
 }
 
 var dark = false;

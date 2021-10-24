@@ -21,13 +21,11 @@ BIN = bin
 OUTDIR = $(OUT)/$(CONFIG)
 #endregion
 
-
-
 $(OUTDIR)/$(BIN)/index.html: local/shell.html $(OUTDIR)/$(BIN)/ui.js $(OUTDIR)/$(BIN)/worker.js | $(OUTDIR)
 	cp $< $@
 
-$(OUTDIR)/$(BIN)/ui.js: ui/main.js | $(OUTDIR)
-	cp $< $@
+$(OUTDIR)/$(BIN)/ui.js: ui/main.ts | $(OUTDIR)
+	tsc $< --outFile $@
 
 $(OUTDIR)/$(BIN)/worker.js: worker/main.js | $(OUTDIR)
 	cp $< $@
