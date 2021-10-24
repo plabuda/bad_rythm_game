@@ -1,6 +1,6 @@
-let colors = [];
+let worker_colors = [];
 let player_color = "gray";
-let game_state = 1;
+let worker_game_state = 1;
 let score = 0;
 
 function* colorgen() {
@@ -19,19 +19,16 @@ function* colorgen() {
   }
 }
 
+let color_push_props = {
+  table: ["gray", "gray", "gray", "gray", "gray", "gray"],
+  counter: 1 - 1,
+};
+
 function color_push(color) {
-  if (color_push.table == undefined) {
-    color_push.table = ["gray", "gray", "gray", "gray", "gray", "gray"];
-  }
-
-  if (color_push.counter == undefined) {
-    color_push.counter = 0;
-  }
-
-  const response = color_push.table[color_push.counter];
-  color_push.table[color_push.counter] = color;
-  color_push.counter += 1;
-  color_push.counter %= 6;
+  const response = color_push_props.table[color_push_props.counter];
+  color_push_props.table[color_push_props.counter] = color;
+  color_push_props.counter += 1;
+  color_push_props.counter %= 6;
   return response;
 }
 
@@ -44,16 +41,16 @@ function step_game() {
   console.log("Current Color is " + current_color);
   console.log("Player Color is " + player_color);
   const pass =
-    game_state == 1 &&
+    worker_game_state == 1 &&
     (current_color == "gray" || current_color == player_color);
   if (pass && current_color != "gray") {
     score += 1;
   }
-  game_state = pass ? 1 : 2;
+  worker_game_state = pass ? 1 : 2;
   let response = {
     cleared: pass,
     color: new_color,
-    state: game_state,
+    state: worker_game_state,
   };
   if (!pass) {
     response["score"] = score;
@@ -66,7 +63,7 @@ function substep() {
 }
 
 self.onmessage = (e) => {
-  if (game_state == 1) {
+  if (worker_game_state == 1) {
     player_color = e.data;
   }
 };

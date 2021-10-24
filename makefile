@@ -25,7 +25,10 @@ $(OUTDIR)/$(BIN)/index.html: local/shell.html $(OUTDIR)/$(BIN)/ui.js $(OUTDIR)/$
 	cp $< $@
 
 $(OUTDIR)/$(BIN)/ui.js: ui/main.ts | $(OUTDIR)
-	tsc $< --outFile $@
+	tsc --outFile $@ --project ui/tsconfig.json
+
+$(OUTDIR)/$(BIN)/worker.js: worker/main.ts | $(OUTDIR)
+	tsc --outFile $@ --project worker/tsconfig.json
 
 $(OUTDIR)/$(BIN)/worker.js: worker/main.js | $(OUTDIR)
 	cp $< $@
